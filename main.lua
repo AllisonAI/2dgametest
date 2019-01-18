@@ -8,7 +8,6 @@ player = nil -- used across modules
 function love.load()
   -- Load map file
   map = sti("assets/map.lua")
-
   -- Create new dynamic data layer called "Sprites" as the 3rd layer
   local layer = map:addCustomLayer("Sprites", 3)
 
@@ -43,7 +42,7 @@ function love.load()
 end
 
 function love.update(dt)
-  --Timer.update(dt)
+  Timer.update(dt)
   map:update(dt)
   player.sprite:update(dt)
 end
