@@ -1,4 +1,4 @@
-local Timer = require "modules/timer"
+local Timer = require "modules/hump/timer"
 local sti = require "modules/sti"
 local anim = require "modules/anim"
 local playerobj = require "modules/playerobj"
@@ -43,8 +43,7 @@ function love.load()
 end
 
 function love.update(dt)
-  print('hello')
-  Timer.update(dt)
+  --Timer.update(dt)
   map:update(dt)
   player.sprite:update(dt)
 end
