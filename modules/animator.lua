@@ -38,7 +38,7 @@ local function err( errCode, passed, ... )
 		assert( types[1]( passed ), errCode:gsub( '%%type%%', typeOfPassed ) )
 		return true
 	end
-	local passed = false
+	passed = false
 	for i = 1, #types do
 		if types[i] == typeOfPassed then
 			passed = true
@@ -55,7 +55,7 @@ local function getFrameType( self, frame )
 end
 
 local function isPositive( x ) return x > 0 end
-local function isInteger( x ) return x % 1 == 0 end
+--local function isInteger( x ) return x % 1 == 0 end
 local function sign( x, y )
 	return math.abs( y - x ) / ( y - x )
 end
