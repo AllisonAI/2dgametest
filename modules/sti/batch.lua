@@ -26,9 +26,7 @@ local Batch = {}
 local lnewSpriteBatch = love.graphics.newSpriteBatch
 local ldraw = love.graphics.draw
 
-local SpriteBatch = {
-   _isSpriteBatch = true
-}
+local SpriteBatch = { _isSpriteBatch = true }
 SpriteBatch.__index = SpriteBatch
 
 function SpriteBatch:add (...)
@@ -71,8 +69,7 @@ function SpriteBatch:set (id, ...) --TODO: Implement
 end
 
 function SpriteBatch:setDrawRange(start, count)
-   self._start = start
-   self._count = count
+   self._start, self._count = start, count
 end
 
 function SpriteBatch:setTexture(texture)
@@ -80,37 +77,42 @@ function SpriteBatch:setTexture(texture)
 end
 
 function Batch.newSpriteBatch (texture, maxsprites, usage) --image, maxsprites, usage
-   print('LovePotion SpriteBatch')
    return setmetatable({
       _quads = {},
       _buffersize = maxsprites,
       _color = {},
-      _start = nil,
-      _count = nil,
       _texture = texture
    }, SpriteBatch)
 end
 
 function Batch.draw (drawable, x, y, r, sx, sy, ox, oy, kx, ky)
    if drawable._isSpriteBatch then
-      for _, quad in ipairs(drawable._quads) do
+      local start = drawable._start or 1
+      local count = drawable._count or (#drawable._quads - start)
+
+      for i=start, start + count do
+         local quad = drawable._quads[i]
          love.graphics.draw(drawable._texture, unpack(quad, 1, quad.n))
       end
    else
       ldraw(drawable, x, y, r, sx, sy, ox, oy, kx, ky)
    end
 end
-
+ 
 --luacheck: push ignore
 function Batch.enable ()
    love.graphics.draw = Batch.draw
    love.graphics.newSpriteBatch = Batch.newSpriteBatch
-end
 
+   return self
+end
+ 
 function Batch.disable ()
    love.graphics.draw = ldraw
    love.graphics.newSpriteBatch = lnewSpriteBatch
+
+   return self
 end
 --luacheck: pop
-
-return Batch
+ 
+return Batch.enable() --ENABLED BY DEFAULT!
