@@ -20,6 +20,8 @@ local floor = math.floor
 local lg    = require(cwd .. "graphics")
 local Map   = {}
 local Batch = require("modules/sti/batch")
+
+Batch.enable()
 Map.__index = Map
 
 local function new(map, plugins, ox, oy)
@@ -416,7 +418,7 @@ function Map:addNewLayerTile(layer, tile, x, y)
 	local image   = self.tilesets[tile.tileset].image
 
 	layer.batches[tileset] = layer.batches[tileset]
-		or lg.newSpriteBatch(image, layer.width * layer.height)
+		or love.graphics.newSpriteBatch(image, layer.width * layer.height)
 
 	local batch = layer.batches[tileset]
 	local tileX, tileY = self:getLayerTilePosition(layer, tile, x, y)
@@ -524,7 +526,7 @@ end
 --- Batch Tiles in Object Layer for improved draw speed
 -- @param layer The Object Layer
 function Map:setObjectSpriteBatches(layer)
-	local newBatch = lg.newSpriteBatch
+	local newBatch = love.graphics.newSpriteBatch
 	local tileW    = self.tilewidth
 	local tileH    = self.tileheight
 	local batches  = {}
@@ -763,7 +765,7 @@ function Map:drawTileLayer(layer)
 	assert(layer.type == "tilelayer", "Invalid layer type: " .. layer.type .. ". Layer must be of type: tilelayer")
 
 	for _, batch in pairs(layer.batches) do
-		Batch.draw(batch, floor(layer.x), floor(layer.y))
+		love.graphics.draw(batch, floor(layer.x), floor(layer.y))
 	end
 end
 

@@ -57,7 +57,7 @@ function SpriteBatch:setTexture(texture)
 end
 
 function Batch.newSpriteBatch (texture, maxsprites, usage) --image, maxsprites, usage
-   print('new')
+   print('LovePotion SpriteBatch')
    return setmetatable({
       _quads = {},
       _buffersize = maxsprites,
