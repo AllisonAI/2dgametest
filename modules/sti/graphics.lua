@@ -1,9 +1,11 @@
 local lg       = love.graphics
 local graphics = { isCreated = lg and true or false }
 
+batch = require("modules/sti/batch")
+
 function graphics.newSpriteBatch(...)
 	if graphics.isCreated then
-		return lg.newSpriteBatch(...)
+		return batch.newSpriteBatch(...)
 	end
 end
 

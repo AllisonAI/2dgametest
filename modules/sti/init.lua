@@ -19,6 +19,7 @@ local ceil  = math.ceil
 local floor = math.floor
 local lg    = require(cwd .. "graphics")
 local Map   = {}
+local Batch = require("modules/sti/batch")
 Map.__index = Map
 
 local function new(map, plugins, ox, oy)
@@ -762,7 +763,7 @@ function Map:drawTileLayer(layer)
 	assert(layer.type == "tilelayer", "Invalid layer type: " .. layer.type .. ". Layer must be of type: tilelayer")
 
 	for _, batch in pairs(layer.batches) do
-		lg.draw(batch, floor(layer.x), floor(layer.y))
+		Batch.draw(batch, floor(layer.x), floor(layer.y))
 	end
 end
 
