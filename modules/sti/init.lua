@@ -20,8 +20,9 @@ local floor = math.floor
 local lg    = require(cwd .. "graphics")
 local Map   = {}
 local Batch = require("modules/sti/batch")
-
-Batch.enable()
+if love.system.getOS() == "Horizon Switch" then -- only the Switch and 3ds need the custom implementation
+	Batch.enable()
+end
 Map.__index = Map
 
 local function new(map, plugins, ox, oy)
