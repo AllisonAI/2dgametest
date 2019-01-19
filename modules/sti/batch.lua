@@ -77,6 +77,7 @@ function SpriteBatch:setTexture(texture)
 end
 
 function Batch.newSpriteBatch (texture, maxsprites, usage) --image, maxsprites, usage
+   print("Horizon LovePotion")
    return setmetatable({
       _quads = {},
       _buffersize = maxsprites,
@@ -115,4 +116,4 @@ function Batch.disable ()
 end
 --luacheck: pop
  
-return Batch.enable() --ENABLED BY DEFAULT!
+return Batch --return Batch.enable()

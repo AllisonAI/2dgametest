@@ -45,7 +45,7 @@ end
 -- Cache images in main STI module
 function utils.cache_image(sti, path, image)
 	image = image or love.graphics.newImage(path)
-	image:setFilter("nearest", "nearest")
+	--image:setFilter("nearest", "nearest")
 	sti.cache[path] = image
 end
 

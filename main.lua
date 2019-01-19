@@ -7,7 +7,7 @@ player = nil -- used across modules
 
 function love.load()
   -- Load map file
-  map = sti("assets/map.lua")
+  map = sti("assets/Maps/map.lua")
   -- Create new dynamic data layer called "Sprites" as the 3rd layer
   local layer = map:addCustomLayer("Sprites", 3)
 
@@ -51,6 +51,7 @@ function love.draw()
   -- Translate world so that player is always centred
   local tx = math.floor(player.x - love.graphics.getWidth()  / 2)
   local ty = math.floor(player.y - love.graphics.getHeight() / 2)
-
+  local thing,thing2 = love.system.getOS() --unsrre if this thing2 is needed
+  love.graphics.print(thing,0,0)
   map:draw(-tx, -ty)
 end

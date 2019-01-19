@@ -20,10 +20,10 @@ local floor = math.floor
 local lg    = require(cwd .. "graphics")
 local Map   = {}
 local Batch = require("modules/sti/batch")
-if love.system.getOS() == "Horizon Switch" then -- only the Switch and 3ds need the custom implementation
+local thing,thing2 = love.system.getOS() --unsrre if this thing2 is needed
+ -- only the Switch and 3ds need the custom implementation
+if love.system.getOS() == "Horizon Switch" or love.system.getOS() == "Horizon 3DS" or (type(love.system.getOS()) == "table" and love.system.getOS()[1] == "Horizon") or thing == "Horizon" then
 	Batch.enable()
-else
-	Batch.disable()
 end
 Map.__index = Map
 
@@ -865,7 +865,7 @@ function Map:resize(w, h)
 		h = h or lg.getHeight()
 
 		self.canvas = lg.newCanvas(w, h)
-		self.canvas:setFilter("nearest", "nearest")
+		--self.canvas:setFilter("nearest", "nearest")
 	end
 end
 
