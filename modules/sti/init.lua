@@ -22,6 +22,8 @@ local Map   = {}
 local Batch = require("modules/sti/batch")
 if love.system.getOS() == "Horizon Switch" then -- only the Switch and 3ds need the custom implementation
 	Batch.enable()
+else
+	Batch.disable()
 end
 Map.__index = Map
 
